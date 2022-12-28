@@ -1,20 +1,19 @@
 import React, { useState } from "react";
-
+import "animate.css";
 const TaskCards = ({ item, deleteTarea, handleChange }) => {
   const [activar, setActivar] = useState(false);
   const [input, setInput] = useState(item.tarea);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let datos = {
-      id: item.id,
-      tarea: input.toUpperCase(),
-    };
-    handleChange(datos);
+    handleChange({ id: item.id, tarea: input.toUpperCase() });
     setActivar(false);
   };
   return (
-    <div className="card my-3" onDoubleClick={() => setActivar(!activar)}>
+    <div
+      className="card my-3 animate__animated animate__fadeIn"
+      onDoubleClick={() => setActivar(!activar)}
+    >
       <div className="card-body d-flex align-items-center justify-content-between">
         {activar ? (
           <form onSubmit={handleSubmit}>
@@ -26,17 +25,18 @@ const TaskCards = ({ item, deleteTarea, handleChange }) => {
             />
           </form>
         ) : (
-          <span>{input.toUpperCase()}</span>
+          <span onTouchEnd={() => setActivar(!activar)}>
+            {input.toUpperCase()}
+          </span>
         )}
-
-        <button
-          className="btn btn-danger ms-2"
+        <span
+          className="btn-delete text-white"
           onClick={() => {
             deleteTarea(item.id);
           }}
         >
-          X
-        </button>
+          <i className="fa fa-times" aria-hidden="true"></i>
+        </span>
       </div>
     </div>
   );

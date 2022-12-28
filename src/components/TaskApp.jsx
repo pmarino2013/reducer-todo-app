@@ -39,12 +39,11 @@ const TaskApp = () => {
               value={textValue}
               onChange={(e) => setTextValue(e.target.value)}
               className="form-control"
-              placeholder="Escribe la tarea"
             />
           </form>
         </div>
       </div>
-      <div className="row mt-5">
+      <div className="row mt-3">
         <div className="col-12 col-md-6 offset-md-3">
           {state.map((item) => (
             <TaskCards
